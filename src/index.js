@@ -1,7 +1,7 @@
 const express = require("express");
 const env = require("dotenv");
 const app = express();
-// const body-parser = require("body-parser");
+// const bodyParser = require("body-parser");
 const mongoose = require("mongoose");
 
 //routes
@@ -17,7 +17,7 @@ mongoose
   .connect(
     `mongodb+srv://${process.env.USER_NAME}:${process.env.USER_PASSWORD}@cluster0.i7ckm.mongodb.net/${process.env.MONGO_DATABASE}?retryWrites=true&w=majority`,
     {
-      // useNewUrlParser: true,
+      useNewUrlParser: true,
       useUnifiedTopology: true,
       useCreateIndex: true,
     }
@@ -26,7 +26,7 @@ mongoose
     console.log("Database connected");
   });
 
-// app.use(bodyParser());
+app.use(express.json());
 app.use("/api", authRoutes);
 app.use("/api", adminRoutes);
 
